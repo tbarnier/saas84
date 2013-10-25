@@ -8,7 +8,6 @@ class MoviesController < ApplicationController
 
 	def sort
 		session[:sort] = params[:id]
-		redirect_to movies_path
 	end
 
   def index

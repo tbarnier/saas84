@@ -1,2 +1,5 @@
 class Movie < ActiveRecord::Base
+#	string		:title
+#	datetime	:release_date
+#	string		:rating
 end
