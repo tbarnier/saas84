@@ -24,6 +24,11 @@ helper_method :sort_column, :sort_direction
 		@movies = Movie.where(rating: rating.keys).order(sort)
 	end
 	@all_ratings=['G','PG','PG-13','R']
+	@r = params["ratings"]
+	if(@r==nil)
+		@r=@all_ratings
+	end
+	puts @r
   end
 
   def new

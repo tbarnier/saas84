@@ -25,6 +25,10 @@ helper_method :sort_column, :sort_direction
 	end
 	@all_ratings=['G','PG','PG-13','R']
 	@r = params["ratings"]
+	if(@r==nil)
+		@r={'G'=>'G','PG'=>'PG','PG-13'=>'PG-13','R'=>'R'}
+	end
+	puts @r
   end
 
   def new
