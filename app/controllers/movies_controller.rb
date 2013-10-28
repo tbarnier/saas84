@@ -6,22 +6,21 @@ helper_method :sort_column, :sort_direction
     # will render app/views/movies/show.<extension> by default
   end
 
-	def sort
-		session[:sort] = params[:id]
-		redirect_to movies_path
-	end
-
   def index
-	sort=session[:sort]
+	if params[:sort] != nil
+		session[:sort] = params[:sort]
+	end
+	@sort=session[:sort]
+	logger.debug @sort
 	rating=params[:ratings]
 	puts params
 	if(rating == nil)
-		if(sort == nil)
-			sort='id'
+		if(@sort == nil)
+			@sort='id'
 		end
-		@movies = Movie.order(sort)
+		@movies = Movie.order(@sort)
 	else
-		@movies = Movie.where(rating: rating.keys).order(sort)
+		@movies = Movie.where(rating: rating.keys).order(@sort)
 	end
 	@all_ratings=['G','PG','PG-13','R']
 	@r = params["ratings"]
