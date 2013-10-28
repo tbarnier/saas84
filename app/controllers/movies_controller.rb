@@ -14,6 +14,7 @@ helper_method :sort_column, :sort_direction
   def index
 	sort=session[:sort]
 	rating=params[:ratings]
+	puts params
 	if(rating == nil)
 		if(sort == nil)
 			sort='id'
@@ -23,6 +24,7 @@ helper_method :sort_column, :sort_direction
 		@movies = Movie.where(rating: rating.keys).order(sort)
 	end
 	@all_ratings=['G','PG','PG-13','R']
+	@r = params["ratings"]
   end
 
   def new
