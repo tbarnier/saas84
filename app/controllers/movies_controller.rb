@@ -12,18 +12,22 @@ helper_method :sort_column, :sort_direction
 	end
 	@sort=session[:sort]
 	logger.debug @sort
-	rating=params[:ratings]
-	puts params
-	if(rating == nil)
+	
+	if params[:ratings] != nil
+		session[:ratings] = params[:ratings]
+	end
+	@rating=session[:ratings]
+
+	if(@rating == nil)
 		if(@sort == nil)
 			@sort='id'
 		end
 		@movies = Movie.order(@sort)
 	else
-		@movies = Movie.where(rating: rating.keys).order(@sort)
+		@movies = Movie.where(rating: @rating.keys).order(@sort)
 	end
 	@all_ratings=['G','PG','PG-13','R']
-	@r = params["ratings"]
+	@r = @rating
 	if(@r==nil)
 		@r={'G'=>'G','PG'=>'PG','PG-13'=>'PG-13','R'=>'R'}
 	end
